@@ -1,0 +1,35 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Make Office 365 Cookies</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Make Office 365 Cookies</h1>
+    <form method="post" onsubmit="return makeCookies()">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="timeout">Timeout (days):</label>
+        <input type="number" id="timeout" name="timeout" value="30" min="1" max="365"><br><br>
+        <input type="submit" value="Make Cookies">
+    </form>
+    <script>
+        function makeCookies() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var timeout = document.getElementById("timeout").value;
+            var date = new Date();
+            date.setTime(date.getTime() + (timeout * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + date.toUTCString();
+            document.cookie = "O365Email=" + email + "; " + expires + "; path=/";
+            document.cookie = "O365Password=" + password + "; " + expires + "; path=/";
+            alert("Office 365 cookies created successfully!");
+            return false;
+        }
+    </script>
+</body>
+</html>
